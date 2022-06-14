@@ -28,6 +28,11 @@ export const AppReducer = (state, action) => {
                 ...state,
                 rate: action.payload
             }
+        case 'UPDATE_PROVIDER':
+            return {
+                ...state,
+                web3Provider: action.payload
+            }
         default:
             return state;
     };

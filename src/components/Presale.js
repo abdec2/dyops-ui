@@ -10,7 +10,7 @@ import { parse } from 'url';
 const crowdsaleAddress = CONFIG.ICO_CONTRACT_ADDRESS;
 
 function Presale() {
-    const { account, tokenBalance, bnbBalance } = useContext(GlobalContext);
+    const { account, tokenBalance, bnbBalance, web3Provider, fetchAccountData } = useContext(GlobalContext);
     const [loading, setLoading] = useState(false);
     const [recQty, setRecQty] = useState(0);
 
@@ -71,12 +71,10 @@ function Presale() {
             }
 
             setLoading(true);
-            const web3modal = new Web3Modal();
-            const instance = await web3modal.connect();
-            const provider = new ethers.providers.Web3Provider(instance);
+            const provider = web3Provider;
             const signer = provider.getSigner();
             const usdtContract = new ethers.Contract(CONFIG.USDT_ADDRESS, tokenAbi, signer);
-            const price = ethers.utils.parseEther(ethPrice.current.value);
+            const price = ethers.utils.parseUnits(ethPrice.current.value, CONFIG.USDT_DECIMAL);
             const transaction = await usdtContract.approve(CONFIG.ICO_CONTRACT_ADDRESS, price, {from: account});
             await transaction.wait();
             buyToken(price, signer);
@@ -89,8 +87,9 @@ function Presale() {
     const buyToken = async (price, signer) => {
         try {
             const contract = new ethers.Contract(crowdsaleAddress, CROWDSALE_ABI, signer);
-            
-            if (bnbBalance < ethPrice.current.value) {
+            console.log(bnbBalance)
+            console.log(ethPrice.current.value)
+            if (parseFloat(bnbBalance) < parseFloat(ethPrice.current.value)) {
                 setLoading(false);
                 alert('Insufficient Balance');
                 return;
@@ -98,6 +97,7 @@ function Presale() {
 
             const transaction = await contract.buyTokens(account, price.toString());
             await transaction.wait();
+            fetchAccountData();
 
             setLoading(false);
             alert('purchase done');

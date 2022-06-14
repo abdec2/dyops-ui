@@ -9,66 +9,49 @@ import icoAbi from './../abi/abi.json'
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const providerOptions = {
-  walletconnect: {
-    package: WalletConnectProvider, // required
-    options: {
-      infuraId: process.env.REACT_APP_INFURA_PROJECT_ID // required
+    walletconnect: {
+        package: WalletConnectProvider, // required
+        options: {
+            infuraId: process.env.REACT_APP_INFURA_PROJECT_ID // required
+        }
     }
-  }
 };
 
 
 
-const HeaderComponent = ({setError, setErrMsg}) => {
+const HeaderComponent = ({ setError, setErrMsg }) => {
 
-    const { account, addAccount, delAccount, updateTokenBalance, updateBNBBalance, updateRate } = useContext(GlobalContext);
-
-    const getTokenBalance = async(signer, address) => {
-        const tokenContract = new ethers.Contract(CONFIG.TOKEN_CONTRACT, tokenABI, signer)
-        const balanceOf = await tokenContract.balanceOf(address) 
-        updateTokenBalance(ethers.utils.formatUnits(balanceOf, CONFIG.TOKEN_DECIMAL))
-        console.log(ethers.utils.formatUnits(balanceOf, CONFIG.TOKEN_DECIMAL));
-    }
-
-    const getICORate = async(signer) => {
-        const contract = new ethers.Contract(CONFIG.ICO_CONTRACT_ADDRESS, icoAbi, signer)
-        const rate = await contract.rate() 
-        updateRate(rate.toString())
-        console.log(rate.toString());
-    }
-
-    const getNativeBalance = async (signer, address) => {
-        const tokenContract = new ethers.Contract(CONFIG.USDT_ADDRESS, tokenABI, signer)
-        const balanceOf = await tokenContract.balanceOf(address) 
-        updateBNBBalance(parseFloat(ethers.utils.formatEther(balanceOf)).toFixed(4))
-        console.log(parseFloat(ethers.utils.formatEther(balanceOf)).toFixed(4))
-    }
+    const { account, addAccount, delAccount, updateProvider, fetchAccountData } = useContext(GlobalContext);
 
     const connectWallet = async () => {
-        const web3modal = new Web3Modal({
-            providerOptions
-        });
-        const instance = await web3modal.connect();
-        const provider = new ethers.providers.Web3Provider(instance);
-        const signer = provider.getSigner();
-        const address = await signer.getAddress();
-        addAccount({ id: address });
-        const network = await provider.getNetwork();
-        console.log(network)
-        if(network.chainId !== CONFIG.NETWORK_ID ) {
-            setError(true) 
-            setErrMsg('Contract is not deployed on current network. please choose Binance Smartchain Mainnet')
-        } else {
-            setError(false) 
-            setErrMsg('')
-            getTokenBalance(signer, address)
-            getNativeBalance(signer, address)
-            getICORate(signer)
+        try {
+            const web3modal = new Web3Modal({
+                providerOptions
+            });
+            const instance = await web3modal.connect();
+            const provider = new ethers.providers.Web3Provider(instance);
+            updateProvider(provider)
+            const signer = provider.getSigner();
+            const address = await signer.getAddress();
+            addAccount({ id: address });
+            const network = await provider.getNetwork();
+            console.log(network)
+            if (network.chainId !== CONFIG.NETWORK_ID) {
+                setError(true)
+                setErrMsg('Contract is not deployed on current network. please choose Binance Smartchain Mainnet')
+            } else {
+                setError(false)
+                setErrMsg('')
+                fetchAccountData();
+            }
+        } catch (e) {
+            console.log(e)
         }
         
     }
-    useEffect(()=>{
-        if(window.ethereum) {
+    useEffect(() => {
+        fetchAccountData()
+        if (window.ethereum) {
             window.ethereum.on('accountsChanged', accounts => {
                 // addAccount({ id: accounts[0] })
                 connectWallet()
