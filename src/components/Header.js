@@ -38,7 +38,7 @@ const HeaderComponent = ({ setError, setErrMsg }) => {
             console.log(network)
             if (network.chainId !== CONFIG.NETWORK_ID) {
                 setError(true)
-                setErrMsg('Contract is not deployed on current network. please choose Binance Smartchain Mainnet')
+                setErrMsg(`Contract is not deployed on current network. please choose ${CONFIG.NETWORK}`)
             } else {
                 setError(false)
                 setErrMsg('')
