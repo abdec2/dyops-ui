@@ -20,8 +20,7 @@ function App() {
     <GlobalProvider>
 
       <div className="container mx-auto px-10 max-w-7xl">
-          <HeaderComponent setError={setError} setErrMsg={setErrMsg}/>
-          <Presale />
+          <Presale setError={setError} setErrMsg={setErrMsg} />
       </div>
       {error && (<AlertBox  msg={errMsg}/>)}
     </GlobalProvider>

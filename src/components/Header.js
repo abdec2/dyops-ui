@@ -2,10 +2,7 @@ import { ethers } from "ethers";
 import { useContext, useEffect } from "react";
 import Web3Modal from 'web3modal';
 import { GlobalContext } from "../context/GlobalContext";
-import logo from './../assets/logo.jpg';
 import CONFIG from './../abi/config.json'
-import tokenABI from './../abi/token.json'
-import icoAbi from './../abi/abi.json'
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
 const providerOptions = {

@@ -65,9 +65,9 @@ export const GlobalProvider = ({ children }) => {
         const signer = provider.getSigner();
         const address = await signer.getAddress();
 
-        const dyopsContract = new ethers.Contract(CONFIG.TOKEN_CONTRACT, tokenABI, signer)
-        const dyopsBalance = await dyopsContract.balanceOf(address) 
-        updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
+        // const dyopsContract = new ethers.Contract(CONFIG.TOKEN_CONTRACT, tokenABI, signer)
+        // const dyopsBalance = await dyopsContract.balanceOf(address) 
+        // updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
 
         const tokenContract = new ethers.Contract(CONFIG.USDT_ADDRESS, tokenABI, signer)
         const balanceOf = await tokenContract.balanceOf(address)
@@ -75,6 +75,8 @@ export const GlobalProvider = ({ children }) => {
 
         const contract = new ethers.Contract(CONFIG.ICO_CONTRACT_ADDRESS, icoAbi, signer)
         const rate = await contract.rate()
+        const dyopsBalance = await contract.userPurchases(address) 
+        updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
         updateRate(rate.toString())
     }
 
