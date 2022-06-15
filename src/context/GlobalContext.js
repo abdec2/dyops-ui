@@ -61,23 +61,23 @@ export const GlobalProvider = ({ children }) => {
     }
 
     const fetchAccountData = async () => {
-        const provider = state.web3Provider;
-        const signer = provider.getSigner();
-        const address = await signer.getAddress();
+        try {
+            const provider = state.web3Provider;
+            const signer = provider.getSigner();
+            const address = await signer.getAddress();
 
-        // const dyopsContract = new ethers.Contract(CONFIG.TOKEN_CONTRACT, tokenABI, signer)
-        // const dyopsBalance = await dyopsContract.balanceOf(address) 
-        // updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
+            const tokenContract = new ethers.Contract(CONFIG.USDT_ADDRESS, tokenABI, signer)
+            const balanceOf = await tokenContract.balanceOf(address)
+            updateBNBBalance(ethers.utils.formatUnits(balanceOf, CONFIG.USDT_DECIMAL))
 
-        const tokenContract = new ethers.Contract(CONFIG.USDT_ADDRESS, tokenABI, signer)
-        const balanceOf = await tokenContract.balanceOf(address)
-        updateBNBBalance(ethers.utils.formatUnits(balanceOf, CONFIG.USDT_DECIMAL))
-
-        const contract = new ethers.Contract(CONFIG.ICO_CONTRACT_ADDRESS, icoAbi, signer)
-        const rate = await contract.rate()
-        const dyopsBalance = await contract.userPurchases(address) 
-        updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
-        updateRate(rate.toString())
+            const contract = new ethers.Contract(CONFIG.ICO_CONTRACT_ADDRESS, icoAbi, signer)
+            const rate = await contract.rate()
+            const dyopsBalance = await contract.userPurchases(address) 
+            updateTokenBalance(ethers.utils.formatUnits(dyopsBalance, CONFIG.TOKEN_DECIMAL))
+            updateRate(rate.toString())
+        } catch(e) {
+            console.log(e)
+        }
     }
 
     return (

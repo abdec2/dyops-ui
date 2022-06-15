@@ -5,15 +5,17 @@ import { GlobalContext } from '../context/GlobalContext';
 import CONFIG from './../abi/config.json';
 import CROWDSALE_ABI from './../abi/abi.json';
 import tokenAbi from './../abi/token.json';
-import polygonIcon from './../assets/polygon-token.svg';
 import WalletConnectProvider from "@walletconnect/web3-provider";
 const crowdsaleAddress = CONFIG.ICO_CONTRACT_ADDRESS;
 
 const providerOptions = {
+    cacheProvider: false,
     walletconnect: {
         package: WalletConnectProvider, // required
         options: {
-            infuraId: process.env.REACT_APP_INFURA_PROJECT_ID // required
+            rpc: {
+                80001: "https://polygon-mumbai.g.alchemy.com/v2/DWTM5iFBp4kWSnpQ717_uh9jgCOkYRJ9",
+            },
         }
     }
 };
