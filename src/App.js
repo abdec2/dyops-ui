@@ -19,7 +19,7 @@ function App() {
   return (
     <GlobalProvider>
 
-      <div className="container mx-auto px-10 max-w-7xl">
+      <div className="tw-container tw-mx-auto tw-px-10 tw-max-w-7xl">
           <Presale setError={setError} setErrMsg={setErrMsg} />
       </div>
       {error && (<AlertBox  msg={errMsg}/>)}
