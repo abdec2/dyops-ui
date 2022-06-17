@@ -9,24 +9,34 @@
     />
     <meta name="description" content="" />
     <!-- Fav Icon  -->
-    <link rel="shortcut icon" href="./images/favicon.png" />
+    <link
+      rel="shortcut icon"
+      href="<?= base_url()?>website/images/favicon.png"
+    />
     <!-- Site Title  -->
     <title>DYOPS</title>
     <!-- Bundle and Base CSS -->
-    <link rel="stylesheet" href="./assets/css/vendor.bundle.css?ver=192" />
     <link
       rel="stylesheet"
-      href="./assets/css/style.css?ver=192"
+      href="<?= base_url()?>website/assets/css/vendor.bundle.css?ver=192"
+    />
+    <link
+      rel="stylesheet"
+      href="<?= base_url()?>website/assets/css/style.css?ver=192"
       id="changeTheme"
     />
     <!-- Extra CSS -->
-    <link rel="stylesheet" href="./assets/css/theme.css?ver=192" />
+    <link
+      rel="stylesheet"
+      href="<?= base_url()?>website/assets/css/theme.css?ver=192"
+    />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
     />
     <style>
-      .animated, .animate.key {
+      .animated,
+      .animate.key {
         visibility: inherit;
       }
     </style>
@@ -51,14 +61,14 @@
                 <a href="" class="logo-link">
                   <img
                     class="logo-dark"
-                    src="./images/logo.png"
-                    srcset="./images/logo.png 2x"
+                    src="<?= base_url()?>website/images/logo.png"
+                    srcset="<?= base_url()?>website/images/logo.png 2x"
                     alt="logo"
                   />
                   <img
                     class="logo-light"
-                    src="./images/logo.png"
-                    srcset="./images/logo.png 2x"
+                    src="<?= base_url()?>website/images/logo.png"
+                    srcset="<?= base_url()?>website/images/logo.png 2x"
                     alt="logo"
                   />
                 </a>
@@ -87,7 +97,7 @@
                   <ul class="menu">
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#centralized"
                         >Centralized Exchange</a
                       >
@@ -95,7 +105,7 @@
 
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#decentralized"
                         >Decentralized Exchange</a
                       >
@@ -103,7 +113,7 @@
 
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#nft"
                         >NFT Marketplace</a
                       >
@@ -111,7 +121,7 @@
 
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#ido_lanchpad"
                         >IDO Launchpad</a
                       >
@@ -119,7 +129,7 @@
 
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#app-download"
                         >Mobile App Wallet</a
                       >
@@ -127,7 +137,7 @@
 
                     <li class="menu-item">
                       <a
-                        class="menu-link nav-link"
+                        class="menu-link nav-link text-white"
                         href="<?= base_url();?>#dyopslock"
                         >Token Vesting</a
                       >
@@ -218,10 +228,10 @@
                     data-delay=".1"
                   >
                     <div class="wgs-body">
-                      <a href="#" class="wgs-logo">
+                      <a href="<?= base_url()?>" class="wgs-logo">
                         <img
-                          src="./images/logo.png"
-                          srcset="./images/logo.png 2x"
+                          src="<?= base_url()?>website/images/logo.png"
+                          srcset="<?= base_url()?>website/images/logo.png 2x"
                           alt="logo"
                           style="width: 200px"
                         />
@@ -298,14 +308,17 @@
     <!-- preloader -->
     <div class="preloader preloader-alt no-split">
       <span class="spinner spinner-alt"
-        ><img class="spinner-brand" src="./images/logo.png" alt=""
+        ><img
+          class="spinner-brand"
+          src="<?= base_url()?>website/images/logo.png"
+          alt=""
       /></span>
     </div>
 
     <!-- JavaScript -->
-    <script src="./assets/js/jquery.bundle.js?ver=192"></script>
-    <script src="./assets/js/scripts.js?ver=192"></script>
-    <script src="./assets/js/charts.js"></script>
+    <script src="<?= base_url()?>website/assets/js/jquery.bundle.js?ver=192"></script>
+    <script src="<?= base_url()?>website/assets/js/scripts.js?ver=192"></script>
+    <script src="<?= base_url()?>website/assets/js/charts.js"></script>
     <script>
       (function ($) {
         "use strict";

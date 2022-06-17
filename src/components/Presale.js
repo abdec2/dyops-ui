@@ -14,7 +14,7 @@ const providerOptions = {
         package: WalletConnectProvider, // required
         options: {
             rpc: {
-                80001: "https://polygon-mumbai.g.alchemy.com/v2/DWTM5iFBp4kWSnpQ717_uh9jgCOkYRJ9",
+                80001: "https://matic-mumbai.chainstacklabs.com",
             },
         }
     }
@@ -133,7 +133,6 @@ function Presale({setError, setErrMsg}) {
             const address = await signer.getAddress();
             addAccount({ id: address });
             const network = await provider.getNetwork();
-            console.log(network)
             if (network.chainId !== CONFIG.NETWORK_ID) {
                 setError(true)
                 setErrMsg(`Contract is not deployed on current network. please choose ${CONFIG.NETWORK}`)

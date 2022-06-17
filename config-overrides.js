@@ -1,4 +1,6 @@
 const webpack = require("webpack");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const paths = require('react-scripts/config/paths');
 
 module.exports = function override(config, env) {
     config.resolve.fallback = {
@@ -15,6 +17,20 @@ module.exports = function override(config, env) {
           Buffer: ["buffer", "Buffer"],
         }),
       );
+
+    config.plugins.shift();
     
+    config.plugins.push(
+      new HtmlWebpackPlugin(
+        Object.assign(
+          {},
+          {
+            inject: true,
+            template: paths.appHtml,
+          },
+          {}
+        )
+      )
+    );
     return config;
   };
