@@ -14,7 +14,7 @@ const providerOptions = {
         package: WalletConnectProvider, // required
         options: {
             rpc: {
-                80001: "https://matic-mumbai.chainstacklabs.com",
+                137: "https://polygon-rpc.com",
             },
         }
     }
@@ -182,9 +182,9 @@ function Presale({setError, setErrMsg}) {
                         </ul>
                         <h3 className=' tw-uppercase tw-text-sm tw-font-semibold tw-mb-2 tw-text-black'>Token Lock</h3>
                         <ul className='tw-text-sm tw-list-outside tw-list-disc'>
-                            <li className='tw-ml-4'>25% lock 90 days</li>
-                            <li className='tw-ml-4'>25% lock 180 days</li>
-                            <li className='tw-ml-4'>50% lock 360 days</li>
+                            <li className='tw-ml-4'>25% lock 90 days from the distribution date</li>
+                            <li className='tw-ml-4'>25% lock 180 days from the distribution date</li>
+                            <li className='tw-ml-4'>50% lock 90 days from the distribution date</li>
                         </ul>
                     </div>
                 </div>
@@ -228,7 +228,7 @@ function Presale({setError, setErrMsg}) {
                         </div>
 
                         <div className="tw-mt-10">
-                            <button disabled={loading} className="tw-w-full tw-py-2 tw-px-6 tw-uppercase tw-bg-white tw-font-bold tw-text-black tw-rounded-2xl hover:tw-bg-[#142b86] tw-border hover:tw-border-white hover:tw-text-white focus:tw-outline-none">{loading ? 'Busy' : 'Buy'}</button>
+                            <button disabled={loading} className="tw-w-full tw-py-2 tw-px-6 tw-uppercase tw-bg-white tw-font-bold tw-text-black tw-rounded-2xl hover:tw-bg-[#142b86] tw-border hover:tw-border-white hover:tw-text-white focus:tw-outline-none">{loading ? 'Transaction in process' : 'Buy'}</button>
 
                         </div>
                     </form>
