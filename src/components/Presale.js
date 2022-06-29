@@ -168,7 +168,7 @@ function Presale({setError, setErrMsg}) {
                         <h1 className="tw-text-2xl sm:tw-text-4xl tw-font-bold tw-uppercase tw-text-black" >DYOPS TOKEN</h1>
                         <div className='tw-w-4/5 md:tw-w-3/5 tw-mt-3 tw-px-12 tw-py-2 tw-bg-[#142b86] tw-text-white tw-rounded-2xl tw-font-bold tw-mx-auto'>1 USDT = 200,000 DYOPS</div>
                         {account && (
-                            <p className='tw-text-sm tw-text-black tw-mt-4'>Your have purchased: {(tokenBalance) ? tokenBalance : 0} DYOPS</p>
+                            <p className='tw-text-sm tw-text-black tw-mt-4'>You have purchased: {(tokenBalance) ? tokenBalance : 0} DYOPS</p>
                         )}
                         {/* <button className='mt-5 px-6 py-2 bg-[#142b86] text-white rounded font-bold hover:bg-[#007bff]' onClick={() => addToken()}>Add Token to your MetaMask</button> */}
                     </div>
